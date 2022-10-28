@@ -406,7 +406,9 @@ target_include_directories(blipbuf INTERFACE ${THIRDPARTY_DIR}/blip-buf)
 
 add_library(duktape STATIC ${THIRDPARTY_DIR}/duktape/src/duktape.c)
 target_include_directories(duktape INTERFACE ${THIRDPARTY_DIR}/duktape/src)
-
+if(WIN32)
+	target_compile_definitions(duktape PRIVATE DUK_USE_DATE_NOW_WINDOWS)
+endif()
 ################################
 # TIC-80 core
 ################################
