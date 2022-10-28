@@ -367,14 +367,6 @@ void tic_net_end(tic_net *net)
     LightLock_Unlock(&net->tick_lock);
 }
 
-#elif defined(BAREMETALPI)
-
-tic_net* tic_net_create(const char* host) {return NULL;}
-void tic_net_get(tic_net* net, const char* url, net_get_callback callback, void* calldata) {}
-void tic_net_close(tic_net* net) {}
-void tic_net_start(tic_net *net) {}
-void tic_net_end(tic_net *net) {}
-
 #elif defined(USE_LIBUV)
 
 #include "defines.h"
@@ -606,5 +598,13 @@ void tic_net_close(tic_net* net)
 {
     free(net);
 }
+
+#else
+
+tic_net* tic_net_create(const char* host) {return NULL;}
+void tic_net_get(tic_net* net, const char* url, net_get_callback callback, void* calldata) {}
+void tic_net_close(tic_net* net) {}
+void tic_net_start(tic_net *net) {}
+void tic_net_end(tic_net *net) {}
 
 #endif
